@@ -1,1 +1,5 @@
-# movies-explorer-api
+# Диплом backend
+### Серверная часть проекта осуществевлена на Node.js с использованием:
+* express.js
+* Mongoose
+* и тд...
