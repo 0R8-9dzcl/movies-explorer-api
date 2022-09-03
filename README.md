@@ -3,3 +3,5 @@
 * express.js
 * Mongoose
 * и тд...
+* Ip - 130.193.34.132
+* Api - api.movies.explorer.nomoredomains.sbs
