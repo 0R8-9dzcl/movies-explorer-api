@@ -50,7 +50,7 @@ module.exports.postMovie = (req, res, next) => {
 module.exports.deleteMovie = (req, res, next) => {
   Movie.findById(req.params.movieId)
     .then((movie) => {
-      if (!movie) throw new NotFoundError('Фильм с указанным id не найдена');
+      if (!movie) throw new NotFoundError('Фильм с указанным id не найден');
       if (movie.owner.toString() !== req.user._id.toString()) throw new ForbiddenError('Фильм создан другим пользователем');
       return movie.remove()
         .then(() => res.status(200).send({ message: 'Фильм успешно удален.' }));
