@@ -16,7 +16,7 @@ const {
   loginUserValidator,
 } = require('./validator/userValidator');
 
-const { PORT = 3500 } = process.env;
+const { PORT = 3000 } = process.env;
 // подключение к базе данных
 mongoose.connect('mongodb://localhost:27017/bitfilmsdb');
 
