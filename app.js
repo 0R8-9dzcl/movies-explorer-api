@@ -4,6 +4,7 @@ const { errors } = require('celebrate'); // валидатор запросов
 const cookieParser = require('cookie-parser');
 const bodyParser = require('body-parser');
 const cors = require('cors'); // импорт CORS
+const { default: helmet } = require('helmet'); // достаём шлем из чулана
 const corsOptions = require('./utils/corsOptions');
 const auth = require('./middlewares/auth');
 const usersRouter = require('./routes/usersRouter');
@@ -25,6 +26,8 @@ mongoose.connect('mongodb://localhost:27017/bitfilmsdb');
 const app = express();
 // включаю корс
 app.use(cors(corsOptions));
+// Надеваем шлем
+app.use(helmet());
 // подключаю парсеры
 app.use(cookieParser());
 app.use(bodyParser.json());
