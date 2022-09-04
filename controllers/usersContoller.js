@@ -62,7 +62,7 @@ module.exports.login = (req, res, next) => {
     .catch(next);
 };
 
-module.exports.logout = (req, res, next) => {
+module.exports.logout = (req, res) => {
   res.clearCookie('jwt', {
     httpOnly: true,
     sameSite: 'none',
@@ -70,7 +70,6 @@ module.exports.logout = (req, res, next) => {
   })
     .status(200)
     .send({ message: 'Выход выполнен' });
-  next();
 };
 
 module.exports.getUser = (req, res, next) => {
