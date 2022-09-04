@@ -4,7 +4,7 @@ const whitelist = [
   'http://localhost:3000',
 ];
 
-module.exports.corsOptions = {
+module.exports = {
   origin(origin, callback) {
     if (whitelist.indexOf(origin) !== -1) {
       callback(null, true);
