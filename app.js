@@ -10,6 +10,7 @@ const moviesRouter = require('./routes/moviesRouter');
 const { login, createUser, logout } = require('./controllers/usersContoller');
 const NotFoundError = require('./errors/NotFoundError');
 const { requestLogger, errorLogger } = require('./middlewares/logger'); // импорт логов
+const centralError = require('./errors/centralError'); // централизованный обработчик ошибок
 // импорт валидаторов
 const {
   createUserValidator,
@@ -44,15 +45,7 @@ app.use('*', (req, res, next) => {
 app.use(errorLogger); // подключаем логгер ошибок
 app.use(errors()); // обработчик ошибок celebrate
 // Централизованная обработка ошибок
-app.use((err, req, res, next) => {
-  const { statusCode = 500, message } = err;
-  res.status(statusCode).send({
-    message: statusCode === 500
-      ? `На сервере произошла ошибка ${err}`
-      : message,
-  });
-  next();
-});
+app.use(centralError);
 
 app.listen(PORT, () => {
   // Если всё работает, консоль покажет, какой порт приложение слушает
