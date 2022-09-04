@@ -1,7 +1,7 @@
 const whitelist = [
   'https://movies.explorer.nomoredomains.sbs',
   'http://movies.explorer.nomoredomains.sbs',
-  // 'http://localhost:3000',
+  'http://localhost:3000',
 ];
 
 module.exports.corsOptions = {
