@@ -6,8 +6,7 @@ const cors = require('cors'); // импорт CORS
 const { default: helmet } = require('helmet'); // достаём шлем из чулана
 const corsOptions = require('./utils/corsOptions');
 const auth = require('./middlewares/auth');
-const usersRouter = require('./routes/usersRouter');
-const moviesRouter = require('./routes/moviesRouter');
+const router = require('./routes/index');
 const { login, createUser, logout } = require('./controllers/usersContoller');
 const NotFoundError = require('./errors/NotFoundError');
 const { requestLogger, errorLogger } = require('./middlewares/logger'); // импорт логов
@@ -24,10 +23,10 @@ mongoose.connect('mongodb://localhost:27017/bitfilmsdb');
 
 const app = express();
 // включаю корс
-app.use(cors(corsOptions));
-// Надеваем шлем
 app.use(helmet());
 // подключаю парсеры
+app.use(cors(corsOptions));
+// Надеваем шлем
 app.use(cookieParser());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
@@ -38,7 +37,7 @@ app.post('/signup', createUserValidator, createUser);
 // Защита авторизацией
 app.use(auth);
 // подключаю роутинг
-app.use('/', usersRouter, moviesRouter);
+app.use('/', router);
 app.post('/signout', logout);
 app.use('*', (req, res, next) => {
   next(new NotFoundError('Запрашиваемый ресурс не найден'));
