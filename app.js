@@ -39,8 +39,7 @@ app.post('/signup', createUserValidator, createUser);
 // Защита авторизацией
 app.use(auth);
 // подключаю роутинг
-app.use('/', usersRouter);
-app.use('/', moviesRouter);
+app.use('/', usersRouter, moviesRouter);
 app.post('/signout', logout);
 app.use('*', (req, res, next) => {
   next(new NotFoundError('Запрашиваемый ресурс не найден'));
