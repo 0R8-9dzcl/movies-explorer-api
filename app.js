@@ -2,7 +2,6 @@ const express = require('express');
 const mongoose = require('mongoose');
 const { errors } = require('celebrate'); // валидатор запросов
 const cookieParser = require('cookie-parser');
-const bodyParser = require('body-parser');
 const cors = require('cors'); // импорт CORS
 const { default: helmet } = require('helmet'); // достаём шлем из чулана
 const corsOptions = require('./utils/corsOptions');
@@ -30,8 +29,8 @@ app.use(cors(corsOptions));
 app.use(helmet());
 // подключаю парсеры
 app.use(cookieParser());
-app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: true }));
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
 app.use(requestLogger); // подключаем логгер запросов
 // роуты неавторизованого пользователя
 app.post('/signin', loginUserValidator, login);
