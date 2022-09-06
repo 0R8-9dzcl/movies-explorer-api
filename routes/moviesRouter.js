@@ -9,7 +9,7 @@ const {
 const {
   postMovieValidator,
   deleteMovieValidator,
-} = require('../validator/movieValidator');
+} = require('../validator/validator');
 
 moviesRouter.get('/movies', getMovies);
 moviesRouter.post('/movies', postMovieValidator, postMovie);

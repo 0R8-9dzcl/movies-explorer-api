@@ -17,7 +17,7 @@ const centralError = require('./middlewares/centralError'); // централи�
 const {
   createUserValidator,
   loginUserValidator,
-} = require('./validator/userValidator');
+} = require('./validator/validator');
 
 const { PORT = 3000 } = process.env;
 // подключение к базе данных
