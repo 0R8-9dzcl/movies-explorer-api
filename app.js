@@ -12,7 +12,7 @@ const moviesRouter = require('./routes/moviesRouter');
 const { login, createUser, logout } = require('./controllers/usersContoller');
 const NotFoundError = require('./errors/NotFoundError');
 const { requestLogger, errorLogger } = require('./middlewares/logger'); // импорт логов
-const centralError = require('./errors/centralError'); // централизованный обработчик ошибок
+const centralError = require('./middlewares/centralError'); // централизованный обработчик ошибок
 // импорт валидаторов
 const {
   createUserValidator,
