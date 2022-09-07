@@ -9,7 +9,7 @@ const errMess = require('../utils/errMess');
 const {
   createUserValidator,
   loginUserValidator,
-} = require('../validator/validator');
+} = require('../middlewares/validator');
 
 // роуты неавторизованого пользователя
 router.post('/signup', createUserValidator, createUser);

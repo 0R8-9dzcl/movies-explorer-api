@@ -5,7 +5,7 @@ const {
   patchUser,
 } = require('../controllers/usersContoller');
 // импорт валидаторов
-const { patchUserValidator } = require('../validator/validator');
+const { patchUserValidator } = require('../middlewares/validator');
 
 usersRouter.get('/me', getUser);
 usersRouter.patch('/me', patchUserValidator, patchUser);
