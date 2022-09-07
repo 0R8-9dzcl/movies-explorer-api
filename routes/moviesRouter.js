@@ -11,8 +11,8 @@ const {
   deleteMovieValidator,
 } = require('../validator/validator');
 
-moviesRouter.get('/movies', getMovies);
-moviesRouter.post('/movies', postMovieValidator, postMovie);
-moviesRouter.delete('/movies/:movieId', deleteMovieValidator, deleteMovie);
+moviesRouter.get('/', getMovies);
+moviesRouter.post('/', postMovieValidator, postMovie);
+moviesRouter.delete('/:movieId', deleteMovieValidator, deleteMovie);
 // экпорт роутера
 module.exports = moviesRouter;

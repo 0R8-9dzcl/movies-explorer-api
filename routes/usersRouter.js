@@ -7,7 +7,7 @@ const {
 // импорт валидаторов
 const { patchUserValidator } = require('../validator/validator');
 
-usersRouter.get('/users/me', getUser);
-usersRouter.patch('/users/me', patchUserValidator, patchUser);
+usersRouter.get('/me', getUser);
+usersRouter.patch('/me', patchUserValidator, patchUser);
 // экпорт роутера
 module.exports = usersRouter;
