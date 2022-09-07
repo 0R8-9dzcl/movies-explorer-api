@@ -19,9 +19,9 @@ const {
   loginUserValidator,
 } = require('./validator/validator');
 
-const { PORT = 3000, DB_URL = devConfig.dbUrl } = process.env;
+const { PORT = 3000, NODE_ENV, DB_URL } = process.env;
 // подключение к базе данных
-mongoose.connect(DB_URL);
+mongoose.connect(NODE_ENV === 'production' ? DB_URL : devConfig.dbUrl);
 
 const app = express();
 // включаю корс
