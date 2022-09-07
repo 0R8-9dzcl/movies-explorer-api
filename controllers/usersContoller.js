@@ -2,6 +2,7 @@ const { NODE_ENV, JWT_SECRET } = process.env;
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 const User = require('../models/user'); // импорт схемы
+const devConfig = require('../utils/devConfig');
 // импорт ошибок
 const BadReqError = require('../errors/BadReqError');
 const NotFoundError = require('../errors/NotFoundError');
@@ -42,7 +43,7 @@ module.exports.login = (req, res, next) => {
       // аутентификация успешна! пользователь в переменной user
       const token = jwt.sign(
         { _id: user._id },
-        NODE_ENV === 'production' ? JWT_SECRET : 'dev-secret',
+        NODE_ENV === 'production' ? JWT_SECRET : devConfig.jwt,
         { expiresIn: '7d' },
       );
       res.cookie('jwt', token, {

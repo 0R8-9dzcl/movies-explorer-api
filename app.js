@@ -1,3 +1,4 @@
+require('dotenv').config();
 const express = require('express');
 const mongoose = require('mongoose');
 const { errors } = require('celebrate'); // валидатор запросов
@@ -5,6 +6,7 @@ const cookieParser = require('cookie-parser');
 const cors = require('cors'); // импорт CORS
 const { default: helmet } = require('helmet'); // достаём шлем из чулана
 const corsOptions = require('./utils/corsOptions');
+const devConfig = require('./utils/devConfig');
 const auth = require('./middlewares/auth');
 const router = require('./routes/index');
 const { login, createUser, logout } = require('./controllers/usersContoller');
@@ -17,9 +19,9 @@ const {
   loginUserValidator,
 } = require('./validator/validator');
 
-const { PORT = 3000 } = process.env;
+const { PORT = 3000, DB_URL = devConfig.dbUrl } = process.env;
 // подключение к базе данных
-mongoose.connect('mongodb://localhost:27017/bitfilmsdb');
+mongoose.connect(DB_URL);
 
 const app = express();
 // включаю корс
