@@ -54,6 +54,6 @@ const movieSchema = new mongoose.Schema({
     type: String,
     default: 'No title in English',
   },
-});
+}, { versionKey: false });
 
 module.exports = mongoose.model('movie', movieSchema);
