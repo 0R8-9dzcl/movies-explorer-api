@@ -18,6 +18,7 @@ const {
   createUserValidator,
   loginUserValidator,
 } = require('./validator/validator');
+const errMess = require('./utils/errMess');
 
 const { PORT = 3000, NODE_ENV, DB_URL } = process.env;
 // подключение к базе данных
@@ -42,7 +43,7 @@ app.use(auth);
 app.use('/', router);
 app.post('/signout', logout);
 app.use('*', (req, res, next) => {
-  next(new NotFoundError('Запрашиваемый ресурс не найден'));
+  next(new NotFoundError(errMess.notFound.url));
 });
 // обработчики ошибок
 app.use(errorLogger); // подключаем логгер ошибок

@@ -7,6 +7,7 @@ const devConfig = require('../utils/devConfig');
 const BadReqError = require('../errors/BadReqError');
 const NotFoundError = require('../errors/NotFoundError');
 const ConflictError = require('../errors/ConflictError');
+const errMess = require('../utils/errMess');
 
 module.exports.createUser = (req, res, next) => {
   const {
@@ -30,8 +31,8 @@ module.exports.createUser = (req, res, next) => {
       })
     // данные не записались, вернём ошибку
       .catch((err) => {
-        if (err.name === 'ValidationError') next(new BadReqError('Переданы некорректные данные при создании пользователя'));
-        if (err.code === 11000) next(new ConflictError('Пользователь с таким адресом электроной почты уже зарегистрирован!'));
+        if (err.name === 'ValidationError') next(new BadReqError(errMess.badReq.registerUser));
+        if (err.code === 11000) next(new ConflictError(errMess.conflict.email));
         next(err);
       }));
 };
@@ -84,13 +85,13 @@ module.exports.patchUser = (req, res, next) => {
   User.findByIdAndUpdate(req.user._id, { email, name }, { new: true, runValidators: true })
     .then((user) => {
       if (!user) {
-        throw new NotFoundError('Пользователь по указанному _id не найден');
+        throw new NotFoundError(errMess.notFound.userById);
       }
       return res.status(200).send({ data: user });
     })
     .catch((err) => {
-      if (err.name === 'ValidationError') next(new BadReqError('Переданы некорректные данные при обновлении данных пользователя'));
-      if (err.name === 'CastError') next(new BadReqError('Переданы некорректные данные при обновлении данных пользователя'));
+      if (err.name === 'ValidationError') next(new BadReqError(errMess.badReq.updateUser));
+      if (err.name === 'CastError') next(new BadReqError(errMess.badReq.updateUser));
       next(err);
     });
 };
