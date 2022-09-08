@@ -20,4 +20,7 @@ module.exports = {
     needAuth: 'Необходима авторизация',
     incorrectData: 'Неправильные почта или пароль',
   },
+  tooMany: {
+    requests: 'Слишком много запросов',
+  },
 };

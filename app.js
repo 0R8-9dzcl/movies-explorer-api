@@ -5,6 +5,7 @@ const { errors } = require('celebrate'); // валидатор запросов
 const cookieParser = require('cookie-parser');
 const cors = require('cors'); // импорт CORS
 const { default: helmet } = require('helmet'); // достаём шлем из чулана
+const apiRequestLimiter = require('./middlewares/apiRequestLimiter'); // импорт лимитера
 const corsOptions = require('./utils/corsOptions');
 const devConfig = require('./utils/devConfig');
 const routes = require('./routes/index');
@@ -16,6 +17,8 @@ const { PORT = 3000, NODE_ENV, DB_URL } = process.env;
 mongoose.connect(NODE_ENV === 'production' ? DB_URL : devConfig.dbUrl);
 
 const app = express();
+
+app.use(apiRequestLimiter);
 // включаю корс
 app.use(helmet());
 // подключаю парсеры
