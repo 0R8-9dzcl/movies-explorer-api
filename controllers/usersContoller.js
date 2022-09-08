@@ -1,4 +1,4 @@
-const { NODE_ENV, JWT_SECRET } = process.env;
+const { NODE_ENV, JWT_SECRET, SALT } = process.env;
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 const User = require('../models/user'); // импорт схемы
@@ -15,7 +15,7 @@ module.exports.createUser = (req, res, next) => {
     password,
     name,
   } = req.body;
-  bcrypt.hash(password, 10)
+  bcrypt.hash(password, NODE_ENV === 'production' ? SALT : devConfig.devSalt)
     .then((hash) => User.create({
       email,
       password: hash,
