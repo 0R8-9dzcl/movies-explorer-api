@@ -2,6 +2,7 @@ const mongoose = require('mongoose');
 const validator = require('validator/');
 const bcrypt = require('bcryptjs');
 const AuthError = require('../errors/AuthError');
+const errMess = require('../utils/errMess');
 
 const userSchema = new mongoose.Schema({
   email: {
@@ -31,14 +32,14 @@ userSchema.statics.findUserByCredentials = function loginUser(email, password) {
     .then((user) => {
       if (!user) {
         // ошибка 'Пользователь с такой почтой не найден' код 401
-        throw new AuthError('Неправильные почта или пароль');
+        throw new AuthError(errMess.auth.incorrectData);
       }
       // юзер найден
       return bcrypt.compare(password, user.password)
         .then((matched) => {
           if (!matched) {
             // ошибка 'Неправильные почта или пароль' код 401
-            throw new AuthError('Неправильные почта или пароль');
+            throw new AuthError(errMess.auth.incorrectData);
           }
           // аутентификация успешна
           // отправка данных пользователя

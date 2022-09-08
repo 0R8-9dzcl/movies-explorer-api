@@ -18,5 +18,6 @@ module.exports = {
   },
   auth: {
     needAuth: 'Необходима авторизация',
+    incorrectData: 'Неправильные почта или пароль',
   },
 };
