@@ -15,7 +15,7 @@ module.exports.createUser = (req, res, next) => {
     password,
     name,
   } = req.body;
-  bcrypt.hash(password, NODE_ENV === 'production' ? SALT : devConfig.devSalt)
+  bcrypt.hash(password, NODE_ENV === 'production' ? Number(SALT) : devConfig.devSalt)
     .then((hash) => User.create({
       email,
       password: hash,
