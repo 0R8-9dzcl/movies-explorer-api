@@ -13,7 +13,7 @@ module.exports.postMovieValidator = celebrate({
     thumbnail: Joi.string().required().pattern(regExp),
     movieId: Joi.number().required(),
     nameRU: Joi.string().required(),
-    nameEN: Joi.string().required().default('No title in English'),
+    nameEN: Joi.string().required(),
   }),
 });
 module.exports.deleteMovieValidator = celebrate({

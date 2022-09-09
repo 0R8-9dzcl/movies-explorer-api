@@ -52,7 +52,6 @@ const movieSchema = new mongoose.Schema({
   nameEN: {
     required: true,
     type: String,
-    default: 'No title in English',
   },
 }, { versionKey: false });
 
