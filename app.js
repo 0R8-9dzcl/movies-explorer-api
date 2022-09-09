@@ -18,6 +18,7 @@ mongoose.connect(NODE_ENV === 'production' ? DB_URL : devConfig.dbUrl);
 
 const app = express();
 
+app.use(requestLogger); // подключаем логгер запросов
 app.use(apiRequestLimiter);
 // включаю корс
 app.use(helmet());
@@ -27,7 +28,6 @@ app.use(cors(corsOptions));
 app.use(cookieParser());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
-app.use(requestLogger); // подключаем логгер запросов
 
 // подключаю роутинг
 app.use(routes);
