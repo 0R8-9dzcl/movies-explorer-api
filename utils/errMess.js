@@ -23,4 +23,7 @@ module.exports = {
   tooMany: {
     requests: 'Слишком много запросов',
   },
+  server: {
+    eroor: 'На сервере произошла ошибка',
+  },
 };
