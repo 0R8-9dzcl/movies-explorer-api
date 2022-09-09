@@ -92,6 +92,7 @@ module.exports.patchUser = (req, res, next) => {
     .catch((err) => {
       if (err.name === 'ValidationError') next(new BadReqError(errMess.badReq.updateUser));
       if (err.name === 'CastError') next(new BadReqError(errMess.badReq.updateUser));
+      if (err.code === 11000) next(new ConflictError(errMess.conflict.email));
       next(err);
     });
 };
