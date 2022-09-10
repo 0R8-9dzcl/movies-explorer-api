@@ -6,7 +6,7 @@ const NotFoundError = require('../errors/NotFoundError');
 const errMess = require('../utils/errMess');
 
 module.exports.getMovies = (req, res, next) => {
-  Movie.find({})
+  Movie.find({ owner: req.user._id })
     .then((movie) => res.status(200).send({ data: movie }))
     .catch(next);
 };
