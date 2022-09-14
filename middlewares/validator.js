@@ -2,6 +2,13 @@ const { celebrate, Joi } = require('celebrate');// импорт валидато
 const validator = require('validator/'); // импорт валидатора
 const errMess = require('../utils/errMess');
 
+const isUrl = (value, helpers) => {
+  if (validator.isUrl(value)) {
+    return value;
+  }
+  return helpers.message(errMess.notValid.url);
+};
+
 module.exports.postMovieValidator = celebrate({
   body: Joi.object().keys({
     country: Joi.string().required(),
@@ -9,24 +16,9 @@ module.exports.postMovieValidator = celebrate({
     duration: Joi.number().required(),
     year: Joi.number().required(),
     description: Joi.string().required(),
-    image: Joi.string().required().custom((value, helpers) => {
-      if (validator.isUrl(value)) {
-        return value;
-      }
-      return helpers.message(errMess.notValid.url);
-    }),
-    trailerLink: Joi.string().required().custom((value, helpers) => {
-      if (validator.isUrl(value)) {
-        return value;
-      }
-      return helpers.message(errMess.notValid.url);
-    }),
-    thumbnail: Joi.string().required().custom((value, helpers) => {
-      if (validator.isUrl(value)) {
-        return value;
-      }
-      return helpers.message(errMess.notValid.url);
-    }),
+    image: Joi.string().required().custom(isUrl),
+    trailerLink: Joi.string().required().custom(isUrl),
+    thumbnail: Joi.string().required().custom(isUrl),
     movieId: Joi.number().required(),
     nameRU: Joi.string().required(),
     nameEN: Joi.string().required(),
