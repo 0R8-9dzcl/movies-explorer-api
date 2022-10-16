@@ -4,6 +4,6 @@ const errMess = require('../utils/errMess');
 
 module.exports = rateLimit({
   windowMs: 1 * 60 * 1000, // 1 минута
-  max: 6, // ограничить 6 запросами
+  max: 60, // ограничить 60 запросами
   handler: (req, res, next) => next(new TooManyRequests(errMess.tooMany.requests)),
 });

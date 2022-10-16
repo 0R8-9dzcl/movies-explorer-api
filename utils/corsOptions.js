@@ -6,7 +6,7 @@ const whitelist = [
 const corsOptions = {
   credentials: true,
   methods: 'GET,HEAD,PUT,PATCH,POST,DELETE,',
-  optionsSuccessStatus: 200,
+  optionsSuccessStatus: 204,
 };
 module.exports = (req, callback) => {
   if (whitelist.indexOf(req.header('Origin')) !== -1) {

@@ -1,13 +1,9 @@
-const { celebrate, Joi } = require('celebrate');// импорт валидатора
+const { celebrate, Joi } = require('celebrate'); // импорт валидатора
 const validator = require('validator/'); // импорт валидатора
 const errMess = require('../utils/errMess');
 
-const isUrl = (value, helpers) => {
-  if (validator.isUrl(value)) {
-    return value;
-  }
-  return helpers.message(errMess.notValid.url);
-};
+const isURL = (value, helpers) => (validator.isURL(value)
+  ? value : helpers.message(errMess.notValid.url));
 
 module.exports.postMovieValidator = celebrate({
   body: Joi.object().keys({
@@ -16,9 +12,9 @@ module.exports.postMovieValidator = celebrate({
     duration: Joi.number().required(),
     year: Joi.number().required(),
     description: Joi.string().required(),
-    image: Joi.string().required().custom(isUrl),
-    trailerLink: Joi.string().required().custom(isUrl),
-    thumbnail: Joi.string().required().custom(isUrl),
+    image: Joi.string().required().custom(isURL),
+    trailerLink: Joi.string().required().custom(isURL),
+    thumbnail: Joi.string().required().custom(isURL),
     movieId: Joi.number().required(),
     nameRU: Joi.string().required(),
     nameEN: Joi.string().required(),

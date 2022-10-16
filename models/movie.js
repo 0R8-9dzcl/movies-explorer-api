@@ -29,12 +29,12 @@ const movieSchema = new mongoose.Schema({
   trailerLink: {
     required: true,
     type: String,
-    validator: (link) => validator.isLink(link),
+    validator: (link) => validator.isURL(link),
   },
   thumbnail: {
     required: true,
     type: String,
-    validator: (link) => validator.isLink(link),
+    validator: (link) => validator.isURL(link),
   },
   owner: {
     type: mongoose.ObjectId,
