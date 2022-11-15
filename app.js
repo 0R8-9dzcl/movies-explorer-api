@@ -20,11 +20,11 @@ const app = express();
 
 app.use(requestLogger); // подключаем логгер запросов
 app.use(apiRequestLimiter);
-// включаю корс
-app.use(helmet());
-// подключаю парсеры
-app.use(cors(corsOptions));
 // Надеваем шлем
+app.use(helmet());
+// включаю корс
+app.use(cors(corsOptions));
+// подключаю парсеры
 app.use(cookieParser());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
